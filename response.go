@@ -29,7 +29,7 @@ func (r *Response) AddHeader(key, val []byte) {
 		r.headers = newHeaders
 	}
 
-	r.headers[r.numHeaders] = header{key, val}
+	r.headers[r.numHeaders] = header{key, val, false}
 	r.numHeaders++
 }
 

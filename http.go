@@ -11,8 +11,9 @@ import (
 const OptimalBufferSize = 1500
 
 type header struct {
-	Name  []byte
-	Value []byte
+	Name        []byte
+	Value       []byte
+	needRelease bool
 }
 
 type HTTPParser struct {
@@ -20,6 +21,7 @@ type HTTPParser struct {
 
 	Headers      []header
 	TotalHeaders int
+	headersSize  int
 
 	host     []byte
 	hostRead bool
@@ -193,7 +195,7 @@ loop:
 				continue
 			}
 
-			hp.Headers[h] = header{headerName, input[start:i]}
+			hp.Headers[h] = header{headerName, input[start:i], false}
 			h++
 
 			if h == hp.TotalHeaders {

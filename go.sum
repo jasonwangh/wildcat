@@ -1,0 +1,16 @@
+github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
+github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
+github.com/evanphx/wildcat v0.0.0-20141114174135-e7012f664567 h1:7+oQw6YjB/kk9x27AEC7DMXudqERHD583hZpno18lRw=
+github.com/evanphx/wildcat v0.0.0-20141114174135-e7012f664567/go.mod h1:XNGflD53X+hfdCAt1NGeBUgiUpe9QmweW/zI1gV26Zw=
+github.com/panjf2000/gnet/v2 v2.7.2 h1:c+QhXBKi/Qfdi4fh8ju6xiShGQHS1lHSEk6euFzJaIk=
+github.com/panjf2000/gnet/v2 v2.7.2/go.mod h1:PIMw/8ILZsN/4K11bqDtSE1rEVPoFtjFlc0Q4edkncA=
+github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
+github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
+github.com/stretchr/testify v1.10.0 h1:Xv5erBjTwe/5IxqUQTdXv5kgmIvbHo3QQyRwhJsOfJA=
+github.com/stretchr/testify v1.10.0/go.mod h1:r2ic/lqez/lEtzL7wO/rwa5dbSLXVDPFyf8C91i36aY=
+github.com/vektra/errors v0.0.0-20140903201135-c64d83aba85a h1:lUVfiMMY/te9icPKBqOKkBIMZNxSpM90dxokDeCcfBg=
+github.com/vektra/errors v0.0.0-20140903201135-c64d83aba85a/go.mod h1:KUxJS71XlMs+ztT+RzsLRoWUQRUpECo/+Rb0EBk8/Wc=
+gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405 h1:yhCVgyC4o1eVCa2tZl7eS0r+SDo693bJlVdllGtEeKM=
+gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405/go.mod h1:Co6ibVJAznAaIkqp8huTwlJQCZ016jof/cbN4VW5Yz0=
+gopkg.in/yaml.v3 v3.0.1 h1:fxVm/GzAzEWqLHuvctI91KS9hhNmmWOoWu0XTYJS7CA=
+gopkg.in/yaml.v3 v3.0.1/go.mod h1:K4uyk7z7BCEPqu6E+C64Yfv1cQ7kz7rIZviUmN+EgEM=
