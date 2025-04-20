@@ -17,7 +17,7 @@ type header struct {
 }
 
 type HTTPParser struct {
-	Method, Path, Version []byte
+	Method, Path, Version, inputCopy []byte
 
 	Headers      []header
 	TotalHeaders int

@@ -34,6 +34,10 @@ func NewHTTPParserExt() *HTTPParser {
 }
 
 func (hp *HTTPParser) Release() {
+	if hp.inputCopy != nil {
+		bsPool.Put(hp.inputCopy)
+		hp.inputCopy = nil
+	}
 	// fmt.Println("wildcat HTTPParser Release headersSize:", hp.headersSize)
 	for i := range hp.headersSize {
 		header := hp.Headers[i]
@@ -237,4 +241,13 @@ loop:
 	}
 
 	return 0, ErrMissingData
+}
+
+func (hp *HTTPParser) ParseExtCopy(input []byte) (int, error) {
+	if len(input) <= 0 {
+		return 0, ErrMissingData
+	}
+	hp.inputCopy = bsPool.Get(len(input))
+	copy(hp.inputCopy, input)
+	return hp.ParseExt(hp.inputCopy)
 }
