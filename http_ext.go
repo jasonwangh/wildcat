@@ -2,7 +2,6 @@ package wildcat
 
 import (
 	"bytes"
-	"sync"
 
 	bs "github.com/panjf2000/gnet/v2/pkg/bs"
 	bsPool "github.com/panjf2000/gnet/v2/pkg/pool/byteslice"
@@ -15,29 +14,20 @@ import (
 // @Update
 
 var (
-	parserPool = &sync.Pool{New: func() any {
-		return NewSizedHTTPParserExt(DefaultHeaderSlice)
-	}}
+	DefaultInputCap int
 )
 
-func NewSizedHTTPParserExt(size int) *HTTPParser {
+func NewHTTPParserExt() *HTTPParser {
 	parser := &HTTPParser{
-		TotalHeaders:  size,
+		TotalHeaders:  DefaultHeaderSlice,
 		contentLength: -1,
+		inputCopy:     make([]byte, DefaultInputCap),
 	}
 	parser.initHeaders()
 	return parser
 }
 
-func NewHTTPParserExt() *HTTPParser {
-	return parserPool.Get().(*HTTPParser)
-}
-
-func (hp *HTTPParser) Release() {
-	if hp.inputCopy != nil {
-		bsPool.Put(hp.inputCopy)
-		hp.inputCopy = nil
-	}
+func (hp *HTTPParser) Reset() {
 	// fmt.Println("wildcat HTTPParser Release headersSize:", hp.headersSize)
 	for i := range hp.headersSize {
 		header := hp.Headers[i]
@@ -50,7 +40,6 @@ func (hp *HTTPParser) Release() {
 		header.Value = nil
 	}
 	hp.headersSize = 0
-	parserPool.Put(hp)
 }
 
 func (hp *HTTPParser) initHeaders() {
@@ -75,7 +64,7 @@ func (hp *HTTPParser) FindHeaderExt(name string) []byte {
 	return nil
 }
 
-func (hp *HTTPParser) ParseExt(input []byte) (int, error) {
+func (hp *HTTPParser) parseInput(input []byte) (int, error) {
 	var headers int
 	var path int
 	var ok bool
@@ -243,11 +232,10 @@ loop:
 	return 0, ErrMissingData
 }
 
-func (hp *HTTPParser) ParseExtCopy(input []byte) (int, error) {
+func (hp *HTTPParser) ParseExt(input []byte) (int, error) {
 	if len(input) <= 0 {
 		return 0, ErrMissingData
 	}
-	hp.inputCopy = bsPool.Get(len(input))
-	copy(hp.inputCopy, input)
-	return hp.ParseExt(hp.inputCopy)
+	copy(hp.inputCopy[0:], input)
+	return hp.parseInput(hp.inputCopy[:len(input)])
 }
