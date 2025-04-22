@@ -28,6 +28,10 @@ func NewHTTPParserExt() *HTTPParser {
 }
 
 func (hp *HTTPParser) Reset() {
+	hp.Method = nil
+	hp.Path = nil
+	hp.Version = nil
+	hp.host = nil
 	// fmt.Println("wildcat HTTPParser Release headersSize:", hp.headersSize)
 	for i := range hp.headersSize {
 		header := hp.Headers[i]
